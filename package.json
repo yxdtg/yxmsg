@@ -4,7 +4,16 @@
   "description": "",
   "main": "./dist/yxmsg.js",
   "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "MIT"
+  "keywords": [
+    "typescript",
+    "message",
+    "observer",
+    "publish-subscribe"
+  ],
+  "author": "yxdtg",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yxdtg/yxmsg.git"
+  }  
 }
