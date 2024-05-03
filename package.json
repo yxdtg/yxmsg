@@ -1,0 +1,10 @@
+{
+  "name": "yxmsg",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/yxmsg.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
