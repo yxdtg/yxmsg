@@ -11,8 +11,5 @@
     "publish-subscribe"
   ],
   "author": "yxdtg",
-  "license": "MIT",
-  "repository": {
-    "type": "git"
-  }
+  "license": "MIT"
 }
