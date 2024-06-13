@@ -4,9 +4,9 @@
  */
 export class YxMsg {
     // 消息列表Map
-    private __msgListMap: Map<any, IMsg[]> = new Map();
-    // 消息id
-    private __msgId: number = 0;
+    private _msgListMap: Map<any, IMsg[]> = new Map();
+    // 消息id计数
+    private _msgId: number = 0;
 
     /**
      * 注册消息
@@ -17,7 +17,7 @@ export class YxMsg {
      * @returns 消息id
      */
     public on(type: string, cb: IMsgCb, target: any = null, priority: number = 0): number {
-        const id = ++this.__msgId;
+        const id = ++this._msgId;
 
         const msg: IMsg = {
             id: id,
@@ -26,12 +26,12 @@ export class YxMsg {
             priority: priority,
         };
 
-        let msgList = this.__msgListMap.get(type);
+        let msgList = this._msgListMap.get(type);
         if (msgList) {
             msgList.push(msg);
         } else {
             msgList = [msg];
-            this.__msgListMap.set(type, msgList);
+            this._msgListMap.set(type, msgList);
         }
 
         msgList.sort((a, b) => a.priority - b.priority);
@@ -64,8 +64,11 @@ export class YxMsg {
             return;
         }
         if (args.length === 2) {
-            const id = args[1];
-            this.offById(type, id);
+            if (typeof args[1] === 'number') {
+                this.offById(type, args[1]);
+            } else {
+                this.offByCb(type, args[1]);
+            }
             return;
         }
         if (args.length === 3) {
@@ -76,22 +79,22 @@ export class YxMsg {
         }
     }
     private offByCb(type: string, cb: IMsgCb, target: any = null): void {
-        const msgList = this.__msgListMap.get(type);
+        const msgList = this._msgListMap.get(type);
         if (!msgList) return;
 
         const index = msgList.findIndex((msg) => msg.cb === cb && msg.target === target);
         if (index !== -1) msgList.splice(index, 1);
     }
     private offById(type: string, id: number): void {
-        const msgList = this.__msgListMap.get(type);
+        const msgList = this._msgListMap.get(type);
         if (!msgList) return;
 
         const index = msgList.findIndex((msg) => msg.id === id);
         if (index !== -1) msgList.splice(index, 1);
     }
     private offAll(type: string): void {
-        if (this.__msgListMap.has(type)) {
-            this.__msgListMap.delete(type);
+        if (this._msgListMap.has(type)) {
+            this._msgListMap.delete(type);
         }
     }
 
@@ -101,7 +104,7 @@ export class YxMsg {
      * @param args 消息参数
      */
     public emit(type: string, ...args: any[]): void {
-        const msgList = this.__msgListMap.get(type);
+        const msgList = this._msgListMap.get(type);
         if (!msgList) return;
 
         msgList.forEach((msg) => {
