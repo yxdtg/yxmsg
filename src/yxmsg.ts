@@ -3,6 +3,7 @@
  * 消息系统
  */
 export class YxMsg {
+    
     // 消息列表Map
     private _msgListMap: Map<any, IMsg[]> = new Map();
     // 消息id计数
