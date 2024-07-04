@@ -14,7 +14,7 @@ export class YxMsg {
      * @param type 消息类型
      * @param cb 消息回调函数
      * @param target 回调函数绑定的目标
-     * @param priority 消息执行优先级 默认为0
+     * @param priority 消息执行优先级 默认为0 越小越优先
      * @returns 消息id
      */
     public on(type: string, cb: IMsgCb, target: any = null, priority: number = 0): number {
