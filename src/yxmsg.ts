@@ -3,7 +3,7 @@
  * 消息系统
  */
 export class YxMsg {
-    
+
     // 消息列表Map
     private _msgListMap: Map<any, IMsg[]> = new Map();
     // 消息id计数
@@ -83,8 +83,13 @@ export class YxMsg {
         const msgList = this._msgListMap.get(type);
         if (!msgList) return;
 
-        const index = msgList.findIndex((msg) => msg.cb === cb && msg.target === target);
-        if (index !== -1) msgList.splice(index, 1);
+        if (target) {
+            const index = msgList.findIndex((msg) => msg.cb === cb && msg.target === target);
+            if (index !== -1) msgList.splice(index, 1);
+        } else {
+            const index = msgList.findIndex((msg) => msg.cb === cb);
+            if (index !== -1) msgList.splice(index, 1);
+        }
     }
     private offById(type: string, id: number): void {
         const msgList = this._msgListMap.get(type);
