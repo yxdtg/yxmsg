@@ -56,11 +56,12 @@ message.off("test", id);
 const target = {};
 message.on("test", handler, target);
 
-// 注册消息时可以设置消息优先级 优先级越高 越先执行
+// 注册消息时可以设置消息优先级 值越小 越先执行
 // 优先级默认为0
-message.on("test", handler, null, 1); // 优先级为1
-message.on("test", handler, null, 2); // 优先级为2
-message.on("test", handler, target, 3); // 优先级为3
+message.on("test", () => { console.log("test1") }, null, 1);
+message.on("test", () => { console.log("test2") }, null, 2);
+message.on("test", () => { console.log("test3") }, target, 3);
+// 这里打印结果为 test1 test2 test3
 ```
 
 ## 发送消息
