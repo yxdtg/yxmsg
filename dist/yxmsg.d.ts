@@ -2,14 +2,14 @@
  * 消息系统
  */
 export declare class YxMsg {
-    private __msgListMap;
-    private __msgId;
+    private _msgListMap;
+    private _msgId;
     /**
      * 注册消息
      * @param type 消息类型
      * @param cb 消息回调函数
      * @param target 回调函数绑定的目标
-     * @param priority 消息执行优先级 默认为0
+     * @param priority 消息执行顺序 越小越优先 默认为0
      * @returns 消息id
      */
     on(type: string, cb: IMsgCb, target?: any, priority?: number): number;
@@ -63,7 +63,7 @@ export interface IMsg {
      */
     target: any;
     /**
-     * 执行优先级 默认为0
+     * 执行顺序 值越小越先执行
      */
     priority: number;
 }

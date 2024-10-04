@@ -1,5 +1,8 @@
-# YxMsg
+# YxMsg[不再更新]
 一个使用TypeScript编写的轻量级发布订阅模式库、支持消息优先级。
+
+### 推荐使用yx-pubsub库 它包含了msgm和yxmsg两个库的功能 并且更加安全与灵活
+https://www.npmjs.com/package/yx-pubsub
 
 ## 特性
 - 无任何依赖
